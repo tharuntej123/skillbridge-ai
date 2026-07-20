@@ -1,0 +1,29 @@
+test_database_and_models (__main__.TestSkillBridgeBackend.test_database_and_models)
+Verify that DB tables are created and relationships exist. ... [+] Database tables and relationships validated successfully.
+ok
+test_faiss_search (__main__.TestSkillBridgeBackend.test_faiss_search)
+Verify FAISS vector index builder and query scanning. ... Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]Loading weights: 100%|██████████| 103/103 [00:00<00:00, 3653.11it/s]
+[+] FAISS search verified. Top Match: AI Engineer with score 0.78
+ok
+test_imports (__main__.TestSkillBridgeBackend.test_imports)
+Verify that all core modules import successfully. ... C:\Users\ADMIN\.gemini\antigravity\scratch\skillbridge-ai\backend\app\services\gemini_service.py:5: FutureWarning: 
+
+All support for the `google.generativeai` package has ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-python/blob/main/README.md
+
+  import google.generativeai as genai
+GEMINI_API_KEY environment variable is not set. Gemini services will operate in demo/mock mode.
+[+] All modules imported successfully!
+ok
+test_skill_matching (__main__.TestSkillBridgeBackend.test_skill_matching)
+Verify Sentence-BERT math matching and token overlay functions. ... [+] Skill matching verified. Partial match ratio: 55%
+ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 21.998s
+
+OK

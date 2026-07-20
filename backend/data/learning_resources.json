@@ -1,0 +1,72 @@
+[
+  {
+    "id": "py-01",
+    "topic": "Python",
+    "title": "Official Python Tutorial",
+    "url": "https://docs.python.org/3/tutorial/",
+    "description": "Comprehensive guide from Python Core team covering syntax, OOP, standard library, modules, and error handling."
+  },
+  {
+    "id": "py-02",
+    "topic": "Python",
+    "title": "FastAPI Web Framework Documentation",
+    "url": "https://fastapi.tiangolo.com/",
+    "description": "High-performance framework for building modern APIs. Details routing, query parameters, dependency injection, and Pydantic validation."
+  },
+  {
+    "id": "react-01",
+    "topic": "React",
+    "title": "React.dev Documentation",
+    "url": "https://react.dev/",
+    "description": "Interactive documentation covering functional components, React Hooks (useState, useEffect), custom hooks, virtual DOM, and performance tuning."
+  },
+  {
+    "id": "react-02",
+    "topic": "React",
+    "title": "Next.js App Router Guide",
+    "url": "https://nextjs.org/docs",
+    "description": "SaaS framework for React apps. Covers routing, Server Components, client-side fetching, middleware, and rendering optimizations."
+  },
+  {
+    "id": "java-01",
+    "topic": "Java",
+    "title": "Java Programming Basics",
+    "url": "https://docs.oracle.com/javase/tutorial/",
+    "description": "Oracle Java tutorials covering classes, interfaces, inheritance, generic collections, memory management, and multi-threading."
+  },
+  {
+    "id": "java-02",
+    "topic": "Java",
+    "title": "Spring Boot Reference Guide",
+    "url": "https://spring.io/projects/spring-boot",
+    "description": "Framework to build enterprise Java applications. Focuses on MVC controllers, dependency injection, and JPA Hibernate persistence."
+  },
+  {
+    "id": "dsa-01",
+    "topic": "DSA",
+    "title": "Leetcode Study Plan - Top Interview 150",
+    "url": "https://leetcode.com/studyplan/top-interview-150/",
+    "description": "Essential coding questions spanning arrays, dynamic programming, binary search, trees, sorting, and graph traversals."
+  },
+  {
+    "id": "dsa-02",
+    "topic": "DSA",
+    "title": "GeeksforGeeks Data Structures & Algorithms",
+    "url": "https://www.geeksforgeeks.org/data-structures/",
+    "description": "Conceptual articles and complexity calculations (Big O) for trees, graphs, linked lists, stacks, queues, and sorting algorithms."
+  },
+  {
+    "id": "aws-01",
+    "topic": "AWS",
+    "title": "AWS Certified Cloud Practitioner Hub",
+    "url": "https://aws.amazon.com/certification/certified-cloud-practitioner/",
+    "description": "Overview of AWS cloud services: EC2 instances, S3 storage, RDS, VPC networking, IAM security, and Serverless Lambda execution."
+  },
+  {
+    "id": "aws-02",
+    "topic": "AWS",
+    "title": "AWS Serverless Application Model (SAM) Guide",
+    "url": "https://docs.aws.amazon.com/serverless-sam/latest/developerguide/what-is-sam.html",
+    "description": "How to define and deploy serverless resources, including API Gateways, Lambda functions, and DynamoDB databases on AWS."
+  }
+]
