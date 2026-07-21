@@ -1,7 +1,14 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional, List
 from datetime import datetime
 from decimal import Decimal
+
+
+def validate_gmail_email(value: str) -> str:
+    email = str(value).strip().lower()
+    if not email.endswith("@gmail.com"):
+        raise ValueError("Only Gmail addresses are allowed")
+    return email
 
 # ----------------- AUTH SCHEMAS -----------------
 
@@ -10,9 +17,19 @@ class UserRegister(BaseModel):
     password: str = Field(..., min_length=6)
     role: str = Field(..., pattern="^(student|freelancer)$")
 
+    @field_validator("email")
+    @classmethod
+    def validate_email_domain(cls, value: EmailStr) -> str:
+        return validate_gmail_email(value)
+
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+    @field_validator("email")
+    @classmethod
+    def validate_email_domain(cls, value: EmailStr) -> str:
+        return validate_gmail_email(value)
 
 class Token(BaseModel):
     access_token: str

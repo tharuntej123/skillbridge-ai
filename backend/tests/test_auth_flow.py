@@ -9,7 +9,7 @@ from app.main import app
 
 def test_register_and_login_flow():
     client = TestClient(app)
-    email = "pytest-user@example.com"
+    email = "pytest-user-unique-2@gmail.com"
     password = "pytest-pass-123"
 
     register_resp = client.post(
@@ -26,3 +26,26 @@ def test_register_and_login_flow():
     payload = login_resp.json()
     assert payload["access_token"]
     assert payload["role"] == "student"
+
+
+def test_rejects_non_gmail_registration():
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/auth/register",
+        json={"email": "pytest-user@example.com", "password": "pytest-pass-123", "role": "student"},
+    )
+
+    assert response.status_code == 422, response.text
+
+
+def test_login_requires_registered_gmail_account():
+    client = TestClient(app)
+
+    response = client.post(
+        "/api/auth/login",
+        json={"email": "missing-user@gmail.com", "password": "anything"},
+    )
+
+    assert response.status_code == 401, response.text
+    assert "No account found" in response.text

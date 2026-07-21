@@ -1,4 +1,19 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+function getApiBaseUrl() {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+
+  if (typeof window !== "undefined") {
+    const { hostname } = window.location;
+    if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "0.0.0.0") {
+      return "http://localhost:8000/api";
+    }
+  }
+
+  return "http://localhost:8000/api";
+}
+
+const API_BASE_URL = getApiBaseUrl();
 
 function getHeaders(isMultipart = false) {
   const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
@@ -44,7 +59,11 @@ async function request(endpoint: string, options: RequestInit = {}) {
     return data;
   } catch (error) {
     if (error instanceof Error) {
-      throw new Error(`${error.message} (${url})`);
+      const message = error.message;
+      if (message.includes("Failed to fetch") || message.includes("fetch")) {
+        throw new Error(`Unable to reach the backend server at ${url}. Please make sure the API server is running on port 8000.`);
+      }
+      throw new Error(`${message} (${url})`);
     }
     throw new Error(`Unable to reach the backend server at ${url}. Please make sure it is running.`);
   }
@@ -63,6 +82,17 @@ export const api = {
     const data = await request("/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password: password_raw }),
+    });
+    if (data.access_token) {
+      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("role", data.role);
+    }
+    return data;
+  },
+
+  async signInWithGoogle(email: string, role: string = "student") {
+    const data = await request(`/auth/google?email=${encodeURIComponent(email)}&role=${encodeURIComponent(role)}`, {
+      method: "POST",
     });
     if (data.access_token) {
       localStorage.setItem("token", data.access_token);
