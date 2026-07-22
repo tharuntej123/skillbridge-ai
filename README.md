@@ -155,3 +155,8 @@ If you have Docker installed, you can spin up the entire stack with a single com
 3.  Configure Environment Variables:
     *   `NEXT_PUBLIC_API_URL`: `https://your-backend-service.onrender.com/api`
 4.  Click **Deploy**.
+
+## Authentication Improvements
+
+- Improved login validation
+- Updated authentication API
