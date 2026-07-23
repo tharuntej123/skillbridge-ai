@@ -4,6 +4,8 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from app.config import settings
 
+
+
 # Use a hashing scheme that is stable in this environment without depending on
 # the bcrypt backend being available and compatible.
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
@@ -31,3 +33,7 @@ def decode_access_token(token: str) -> Optional[Dict[str, Any]]:
         return payload
     except JWTError:
         return None
+
+
+def create_access_token_for_user(user: Any) -> str:
+    return create_access_token(data={"sub": user.email, "user_id": user.id, "role": user.role})
