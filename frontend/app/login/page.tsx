@@ -30,7 +30,7 @@ export default function LoginPage() {
       await api.login(trimmedEmail, password);
       router.push("/dashboard");
     } catch (err: any) {
-      setError(err.message || "Failed to log in. Please check your credentials.");
+      setError(err.message || "Failed to log in. Please check your credentials and try again with the new credentials.");
     } finally {
       setLoading(false);
     }
@@ -135,3 +135,4 @@ export default function LoginPage() {
     </div>
   );
 }
+ī
