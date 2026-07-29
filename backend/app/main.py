@@ -2,10 +2,10 @@ import logging
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import settings
-from app.db.session import engine, Base
+from app.db.session import Base, SessionLocal, initialize_database
+from app.models import models  # noqa: F401  # ensure SQLAlchemy models are registered
 from app.routes import auth, profile, jobs, ai
 from app.services.vector_search import vector_index
-from app.db.session import SessionLocal
 
 # Configure logging
 logging.basicConfig(
@@ -48,12 +48,13 @@ app.include_router(profile.router, prefix=settings.API_V1_STR)
 app.include_router(jobs.router, prefix=settings.API_V1_STR)
 app.include_router(ai.router, prefix=settings.API_V1_STR)
 
+initialize_database()
+
 @app.on_event("startup")
 def on_startup():
     logger.info("Initializing database schema...")
     try:
-        # Create all tables on startup
-        Base.metadata.create_all(bind=engine)
+        initialize_database()
         logger.info("Database tables verified/created successfully.")
     except Exception as e:
         logger.critical(f"Failed to initialize database: {e}")

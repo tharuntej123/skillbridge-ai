@@ -31,6 +31,17 @@ function DashboardContent() {
   const [applicantsLoading, setApplicantsLoading] = useState(false);
 
   useEffect(() => {
+    const tokenFromQuery = searchParams.get("token");
+    const roleFromQuery = searchParams.get("role");
+
+    if (tokenFromQuery) {
+      localStorage.setItem("token", tokenFromQuery);
+      if (roleFromQuery) {
+        localStorage.setItem("role", roleFromQuery);
+      }
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+
     const token = localStorage.getItem("token");
     if (!token) {
       router.push("/login");

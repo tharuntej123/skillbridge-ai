@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { api } from "@/lib/api";
-import { Lock, Mail, ArrowRight, Loader2, GraduationCap, Briefcase, Chrome } from "lucide-react";
+import { GoogleLoginButton } from "@/components/GoogleLoginButton";
+import { Lock, Mail, ArrowRight, Loader2, GraduationCap, Briefcase } from "lucide-react";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -37,26 +38,6 @@ export default function RegisterPage() {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    const trimmedEmail = email.trim().toLowerCase();
-    if (!trimmedEmail.endsWith("@gmail.com")) {
-      setError("Please enter your Gmail address first.");
-      return;
-    }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      await api.signInWithGoogle(trimmedEmail, role);
-      router.push("/dashboard");
-    } catch (err: any) {
-      setError(err.message || "Google sign-in failed.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
       <div className="absolute top-10 right-10 h-64 w-64 rounded-full bg-primary/5 blur-[100px]" />
@@ -78,15 +59,7 @@ export default function RegisterPage() {
 
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-3">
-            <button
-              type="button"
-              onClick={handleGoogleSignIn}
-              disabled={loading}
-              className="flex w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-all"
-            >
-              <Chrome className="mr-2 h-4 w-4" />
-              Continue with Google
-            </button>
+            <GoogleLoginButton role={role} label="Continue with Google" />
 
             <div className="flex items-center gap-3">
               <div className="h-px flex-1 bg-white/10" />

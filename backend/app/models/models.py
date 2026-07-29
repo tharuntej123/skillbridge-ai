@@ -14,6 +14,10 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
     role = Column(String(50), nullable=False)  # 'student' or 'freelancer'
+    google_id = Column(String(255), nullable=True, unique=True, index=True)
+    auth_provider = Column(String(50), nullable=True, default="email")
+    name = Column(String(255), nullable=True)
+    profile_picture = Column(String(500), nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
